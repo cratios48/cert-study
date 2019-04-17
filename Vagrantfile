@@ -8,7 +8,9 @@ Vagrant.configure("2") do |config|
     v.memory = 1024
   end
   config.vm.provision "shell", inline: "
+    sudo timedatectl set-timezone Asia/Seoul
     sudo yum -y install vim
+    sudo echo -e '10.10.10.10 server\n10.10.10.20 client' >> /etc/hosts
     "
   # Not sync vdi file
   # If want file provisioning, change vdi location
