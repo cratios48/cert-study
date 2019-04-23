@@ -24,11 +24,17 @@ Vagrant.configure("2") do |config|
 
     s.vm.provider "virtualbox" do |v|
       unless File.exist?(serverDisk)
-        v.customize ['createmedium', '--filename', serverDisk, 
-                      '--variant', 'Standard', '--size', 20 * 1024]
+        v.customize ['createmedium', 
+                      '--filename', serverDisk, 
+                      '--variant', 'Standard', 
+                      '--size', 20 * 1024]
       end
-      v.customize ['storageattach', :id, '--storagectl', 'IDE', 
-                    '--port', 1, '--device', 1, '--type', 'hdd', 
+      v.customize ['storageattach', 
+                    :id, 
+                    '--storagectl', 'IDE', 
+                    '--port', 1, 
+                    '--device', 1, 
+                    '--type', 'hdd', 
                     '--medium', serverDisk]
     end
   end
@@ -41,11 +47,17 @@ Vagrant.configure("2") do |config|
 
     c.vm.provider "virtualbox" do |v|
       unless File.exist?(clientDisk)
-        v.customize ['createhd', '--filename', clientDisk, 
-                      '--variant', 'Standard', '--size', 20 * 1024]
+        v.customize ['createmedium', 
+                      '--filename', clientDisk, 
+                      '--variant', 'Standard', 
+                      '--size', 20 * 1024]
       end
-      v.customize ['storageattach', :id, '--storagectl', 'IDE', 
-                    '--port', 1, '--device', 1,'--type', 'hdd', 
+      v.customize ['storageattach', 
+                    :id, 
+                    '--storagectl', 'IDE', 
+                    '--port', 1, 
+                    '--device', 1,
+                    '--type', 'hdd', 
                     '--medium', clientDisk]
     end
   end
